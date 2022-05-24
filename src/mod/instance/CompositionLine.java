@@ -28,7 +28,6 @@ public class CompositionLine extends JPanel
 	boolean isSelect = false;
 	int selectBoxSize = 5;
 	CanvasPanelHandler cph;
-	boolean isHightlight = false;
 
 	public CompositionLine(CanvasPanelHandler cph) {
 		this.setOpaque(false);

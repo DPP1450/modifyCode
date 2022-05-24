@@ -103,9 +103,11 @@ public class CanvasPanelHandler extends PanelHandler {
 				case 0:
 				case 1:
 					int result = findClickedPort(members.elementAt(i).getLocation(), members.elementAt(i).getSize(), p);
-					if (result != -1)
-						selectedJpanel = members.elementAt(i);
 					selectedJpanelSide = result;
+					if (result != -1) {
+						selectedJpanel = members.elementAt(i);
+						return;
+					}
 				default:
 					break;
 			}
@@ -126,14 +128,18 @@ public class CanvasPanelHandler extends PanelHandler {
 		leftRec.setBounds((int) Locat.getX(), (int) Locat.getY() + Size.height / 2 - 5, 5, 10);
 		Rectangle BottomRec = new Rectangle(Locat);
 		BottomRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY() + Size.height - 5, 10, 5);
-		if (topRec.contains(p))
+		if (topRec.contains(p)) {
 			return TOP;
-		if (rightRec.contains(p))
+		}
+		if (rightRec.contains(p)) {
 			return RIGHT;
-		if (leftRec.contains(p))
+		}
+		if (leftRec.contains(p)) {
 			return LEFT;
-		if (BottomRec.contains(p))
+		}
+		if (BottomRec.contains(p)) {
 			return BOTTOM;
+		}
 		return OUT_SIDE;
 	}
 

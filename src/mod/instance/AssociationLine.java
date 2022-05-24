@@ -13,7 +13,6 @@ import bgWork.handler.CanvasPanelHandler;
 import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
-import bgWork.handler.CanvasPanelHandler;
 
 public class AssociationLine extends JPanel
 		implements IFuncComponent, ILinePainter {
@@ -26,7 +25,6 @@ public class AssociationLine extends JPanel
 	boolean isSelect = false;
 	int selectBoxSize = 5;
 	CanvasPanelHandler cph;
-	boolean isHightlight = false;
 
 	public AssociationLine(CanvasPanelHandler cph) {
 		this.setOpaque(false);
