@@ -16,6 +16,7 @@ import mod.instance.AssociationLine;
 import mod.instance.BasicClass;
 import mod.instance.CompositionLine;
 import mod.instance.GeneralizationLine;
+import mod.instance.DependencyLine;
 import mod.instance.SelectComp;
 import mod.instance.UseCase;
 
@@ -128,7 +129,7 @@ public class FuncPanelHandler extends PanelHandler {
 			case 3:
 				return new CompositionLine(core.getCanvasPanelHandler());
 			case 4:
-				return new CompositionLine(core.getCanvasPanelHandler());
+				return new DependencyLine(core.getCanvasPanelHandler());
 			case 5:
 				return new BasicClass(core.getCanvasPanelHandler());
 			case 6:
