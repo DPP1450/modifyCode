@@ -22,10 +22,13 @@ import mod.instance.DependencyLine;
 import mod.instance.GeneralizationLine;
 import mod.instance.GroupContainer;
 import mod.instance.UseCase;
+import Define.AreaDefine;
 
 public class CanvasPanelHandler extends PanelHandler {
 	Vector<JPanel> members = new Vector<>();
 	Vector<JPanel> selectComp = new Vector<>();
+	JPanel selectedJpanel = null;
+	int selectedJpanelSide = -1;
 	int boundShift = 10;
 
 	public CanvasPanelHandler(JPanel Container, InitProcess process) {
@@ -55,6 +58,7 @@ public class CanvasPanelHandler extends PanelHandler {
 		switch (core.getCurrentFuncIndex()) {
 			case 0:
 				selectByClick(e);
+				setSelectrdPort(e.getPoint());
 				break;
 			case 1:
 			case 2:
@@ -96,6 +100,42 @@ public class CanvasPanelHandler extends PanelHandler {
 			members.elementAt(i).repaint();
 		}
 		contextPanel.updateUI();
+	}
+
+	public void setSelectrdPort(Point p) {
+		System.out.println(p);
+		for (int i = 0; i < members.size(); i++) {
+			switch (core.isFuncComponent(members.elementAt(i))) {
+				case 2:
+				case 3:
+				case 4:
+				case 6:
+				default:
+					break;
+			}
+		}
+	}
+
+	public int clickedPort(Point Locat, Dimension Size, Point p) {
+		int selectBoxSize = 5;
+		final int OUT_SIDE = -1;
+		final int TOP = 3;
+		final int RIGHT = 2;
+		final int LEFT = 1;
+		final int BOTTOM = 0;
+		return OUT_SIDE;
+
+		// gra.fillRect(this.getWidth() / 2 - selectBoxSize, 0, selectBoxSize * 2,
+		// selectBoxSize);
+		// gra.fillRect(this.getWidth() / 2 - selectBoxSize,
+		// this.getHeight() - selectBoxSize, selectBoxSize * 2,
+		// selectBoxSize);
+		// gra.fillRect(0, this.getHeight() / 2 - selectBoxSize, selectBoxSize,
+		// selectBoxSize * 2);
+		// gra.fillRect(this.getWidth() - selectBoxSize,
+		// this.getHeight() / 2 - selectBoxSize, selectBoxSize,
+		// selectBoxSize * 2);
+		// public void fillRect(int x, int y, int width, int height)
 	}
 
 	void selectByClick(MouseEvent e) {

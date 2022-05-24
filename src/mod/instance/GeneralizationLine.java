@@ -28,6 +28,7 @@ public class GeneralizationLine extends JPanel
 	boolean isSelect = false;
 	int selectBoxSize = 5;
 	CanvasPanelHandler cph;
+	boolean isHightlight = false;
 
 	public GeneralizationLine(CanvasPanelHandler cph) {
 		this.setOpaque(false);

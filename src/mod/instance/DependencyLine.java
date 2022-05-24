@@ -24,6 +24,7 @@ public class DependencyLine extends JPanel
     boolean isSelect = false;
     int selectBoxSize = 5;
     CanvasPanelHandler cph;
+    boolean isHightlight = false;
 
     public DependencyLine(CanvasPanelHandler cph) {
         this.setOpaque(false);
