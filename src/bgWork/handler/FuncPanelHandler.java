@@ -108,7 +108,7 @@ public class FuncPanelHandler extends PanelHandler {
 			case 3:
 				return new ImageIcon("icon/composition_line.jpg");
 			case 4:
-				return new ImageIcon("icon/composition_line.jpg");
+				return new ImageIcon("icon/dependency_line.jpg");
 			case 5:
 				return new ImageIcon("icon/class.jpg");
 			case 6:
