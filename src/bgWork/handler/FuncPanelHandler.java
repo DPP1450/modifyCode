@@ -19,14 +19,12 @@ import mod.instance.GeneralizationLine;
 import mod.instance.SelectComp;
 import mod.instance.UseCase;
 
-public class FuncPanelHandler extends PanelHandler
-{
-	Dimension			btnSize		= new Dimension(50, 50);
-	Vector <JButton>	btnlist		= new Vector <>();
-	int					currIndex	= 0;
+public class FuncPanelHandler extends PanelHandler {
+	Dimension btnSize = new Dimension(50, 50);
+	Vector<JButton> btnlist = new Vector<>();
+	int currIndex = 0;
 
-	public FuncPanelHandler(JPanel Container, InitProcess process)
-	{
+	public FuncPanelHandler(JPanel Container, InitProcess process) {
 		super(Container, process);
 		boundDistance = 10;
 		init();
@@ -34,11 +32,9 @@ public class FuncPanelHandler extends PanelHandler
 		Container.add(this.contextPanel);
 	}
 
-	void init()
-	{
+	void init() {
 		int index = 0;
-		while (this.getIcon(index) != null)
-		{
+		while (this.getIcon(index) != null) {
 			JButton btn = new JButton(this.getIcon(index));
 			btn.setBounds(boundDistance,
 					boundDistance + (btnSize.height + boundDistance) * index,
@@ -47,14 +43,13 @@ public class FuncPanelHandler extends PanelHandler
 			btn.setBackground(Color.WHITE);
 			btn.addMouseListener(new HandlerActionListener(this));
 			btnlist.addElement(btn);
-			index ++;
+			index++;
 		}
 		setCurrentBtn(currIndex);
 	}
 
 	@Override
-	void initContextPanel()
-	{
+	void initContextPanel() {
 		contextPanel = new JPanel();
 		contextPanel.setBorder(new LineBorder(Color.GRAY));
 		contextPanel.setLayout(null);
@@ -63,18 +58,14 @@ public class FuncPanelHandler extends PanelHandler
 				(btnSize.height + boundDistance) * btnlist.size()
 						+ boundDistance);
 		contextPanel.setVisible(true);
-		for (int i = 0; i < btnlist.size(); i ++)
-		{
+		for (int i = 0; i < btnlist.size(); i++) {
 			contextPanel.add(btnlist.elementAt(i));
 		}
 	}
 
-	public void check()
-	{
-		for (int i = 0; i < btnlist.size(); i ++)
-		{
-			switch (i - currIndex)
-			{
+	public void check() {
+		for (int i = 0; i < btnlist.size(); i++) {
+			switch (i - currIndex) {
 				case 0:
 					btnlist.elementAt(i).setSelected(true);
 					btnlist.elementAt(i).setBackground(Color.BLACK);
@@ -88,31 +79,25 @@ public class FuncPanelHandler extends PanelHandler
 	}
 
 	@Override
-	public void ActionPerformed(MouseEvent e)
-	{
+	public void ActionPerformed(MouseEvent e) {
 		setCurrentBtn(btnlist.indexOf(e.getSource()));
 	}
 
-	public void setCurrentBtn(int index)
-	{
+	public void setCurrentBtn(int index) {
 		this.currIndex = index;
 		check();
 	}
 
-	public JPanel getCurrentFunc()
-	{
+	public JPanel getCurrentFunc() {
 		return getFunc(currIndex);
 	}
 
-	public int getCurrentFuncIndex()
-	{
+	public int getCurrentFuncIndex() {
 		return currIndex;
 	}
 
-	ImageIcon getIcon(int index)
-	{
-		switch (index)
-		{
+	ImageIcon getIcon(int index) {
+		switch (index) {
 			case 0:
 				return new ImageIcon("icon/select.jpg");
 			case 1:
@@ -122,18 +107,18 @@ public class FuncPanelHandler extends PanelHandler
 			case 3:
 				return new ImageIcon("icon/composition_line.jpg");
 			case 4:
-				return new ImageIcon("icon/class.jpg");
+				return new ImageIcon("icon/composition_line.jpg");
 			case 5:
+				return new ImageIcon("icon/class.jpg");
+			case 6:
 				return new ImageIcon("icon/use_case.jpg");
 			default:
 				return null;
 		}
 	}
 
-	public JPanel getFunc(int index)
-	{
-		switch (index)
-		{
+	public JPanel getFunc(int index) {
+		switch (index) {
 			case 0:
 				return new SelectComp();
 			case 1:
@@ -143,8 +128,10 @@ public class FuncPanelHandler extends PanelHandler
 			case 3:
 				return new CompositionLine(core.getCanvasPanelHandler());
 			case 4:
-				return new BasicClass(core.getCanvasPanelHandler());
+				return new CompositionLine(core.getCanvasPanelHandler());
 			case 5:
+				return new BasicClass(core.getCanvasPanelHandler());
+			case 6:
 				return new UseCase(core.getCanvasPanelHandler());
 			default:
 				return null;
