@@ -136,7 +136,7 @@ public class DependencyLine extends JPanel
         double y_3 = ey - arrXY_1[1];
         double x_4 = ex - arrXY_2[0];
         double y_4 = ey - arrXY_2[1];
-        if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+        if ((from == cph.selectedJpanel && fromSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
                 && toSide == cph.selectedJpanelSide))
             g2.setColor(Color.RED);
         else
@@ -150,7 +150,7 @@ public class DependencyLine extends JPanel
     public void drawDashedLine(Graphics2D g2, int x1, int y1, int x2, int y2) {
         Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL,
                 0, new float[] { 9 }, 0);
-        if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+        if ((from == cph.selectedJpanel && fromSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
                 && toSide == cph.selectedJpanelSide))
             g2.setColor(Color.RED);
         else

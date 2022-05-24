@@ -37,7 +37,7 @@ public class AssociationLine extends JPanel
 
 	@Override
 	public void paintComponent(Graphics g) {
-		if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+		if ((from == cph.selectedJpanel && fromSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
 				&& toSide == cph.selectedJpanelSide))
 			g.setColor(Color.RED);
 		else
