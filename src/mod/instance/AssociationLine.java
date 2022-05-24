@@ -13,6 +13,7 @@ import bgWork.handler.CanvasPanelHandler;
 import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
+import bgWork.handler.CanvasPanelHandler;
 
 public class AssociationLine extends JPanel
 		implements IFuncComponent, ILinePainter {
@@ -36,6 +37,11 @@ public class AssociationLine extends JPanel
 
 	@Override
 	public void paintComponent(Graphics g) {
+		if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+				&& toSide == cph.selectedJpanelSide))
+			g.setColor(Color.RED);
+		else
+			g.setColor(Color.BLACK);
 		Point fpPrime;
 		Point tpPrime;
 		renewConnect();

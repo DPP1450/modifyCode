@@ -1,10 +1,6 @@
 package bgWork.handler;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 
@@ -22,13 +18,12 @@ import mod.instance.DependencyLine;
 import mod.instance.GeneralizationLine;
 import mod.instance.GroupContainer;
 import mod.instance.UseCase;
-import Define.AreaDefine;
 
 public class CanvasPanelHandler extends PanelHandler {
 	Vector<JPanel> members = new Vector<>();
 	Vector<JPanel> selectComp = new Vector<>();
-	JPanel selectedJpanel = null;
-	int selectedJpanelSide = -1;
+	public JPanel selectedJpanel = null;
+	public int selectedJpanelSide = -1;
 	int boundShift = 10;
 
 	public CanvasPanelHandler(JPanel Container, InitProcess process) {
@@ -58,7 +53,7 @@ public class CanvasPanelHandler extends PanelHandler {
 		switch (core.getCurrentFuncIndex()) {
 			case 0:
 				selectByClick(e);
-				setSelectrdPort(e.getPoint());
+				setSelectedPort(e.getPoint());
 				break;
 			case 1:
 			case 2:
@@ -102,27 +97,45 @@ public class CanvasPanelHandler extends PanelHandler {
 		contextPanel.updateUI();
 	}
 
-	public void setSelectrdPort(Point p) {
-		System.out.println(p);
+	public void setSelectedPort(Point p) {
 		for (int i = 0; i < members.size(); i++) {
 			switch (core.isFuncComponent(members.elementAt(i))) {
-				case 2:
-				case 3:
-				case 4:
-				case 6:
+				case 0:
+				case 1:
+					int result = findClickedPort(members.elementAt(i).getLocation(), members.elementAt(i).getSize(), p);
+					if (result != -1) {
+						selectedJpanel = members.elementAt(i);
+						System.out.println("clicked Port !!");
+					}
+					selectedJpanelSide = result;
 				default:
 					break;
 			}
 		}
 	}
 
-	public int clickedPort(Point Locat, Dimension Size, Point p) {
-		int selectBoxSize = 5;
+	public int findClickedPort(Point Locat, Dimension Size, Point p) {
 		final int OUT_SIDE = -1;
 		final int TOP = 3;
 		final int RIGHT = 2;
 		final int LEFT = 1;
 		final int BOTTOM = 0;
+		Rectangle topRec = new Rectangle();
+		topRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY(), 15, 15);
+		Rectangle rightRec = new Rectangle(Locat);
+		rightRec.setBounds((int) Locat.getX() + Size.width - 5, (int) Locat.getY() + Size.height - 5, 15, 15);
+		Rectangle leftRec = new Rectangle(Locat);
+		leftRec.setBounds((int) Locat.getX(), (int) Locat.getY() + Size.height - 5, 15, 15);
+		Rectangle BottomRec = new Rectangle(Locat);
+		BottomRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY() + Size.height - 5, 15, 15);
+		if (topRec.contains(p))
+			return TOP;
+		if (rightRec.contains(p))
+			return RIGHT;
+		if (leftRec.contains(p))
+			return LEFT;
+		if (BottomRec.contains(p))
+			return BOTTOM;
 		return OUT_SIDE;
 
 		// gra.fillRect(this.getWidth() / 2 - selectBoxSize, 0, selectBoxSize * 2,

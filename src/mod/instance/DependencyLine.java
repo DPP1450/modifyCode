@@ -42,7 +42,6 @@ public class DependencyLine extends JPanel
                 fp.y - this.getLocation().y);
         tpPrime = new Point(tp.x - this.getLocation().x,
                 tp.y - this.getLocation().y);
-        g.setColor(Color.BLACK);
         drawDashedALine(g, fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
         if (isSelect == true) {
             paintSelect(g);
@@ -114,7 +113,6 @@ public class DependencyLine extends JPanel
 
     @Override
     public void paintSelect(Graphics gra) {
-        gra.setColor(Color.BLACK);
         gra.fillRect(fp.x, fp.y, selectBoxSize, selectBoxSize);
         gra.fillRect(tp.x, tp.y, selectBoxSize, selectBoxSize);
     }
@@ -129,7 +127,6 @@ public class DependencyLine extends JPanel
 
     public void drawDashedALine(Graphics g, double sx, double sy, double ex, double ey) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.BLACK);
         double H = 10, L = 10;
         double awrad = Math.atan(L / H);
         double arraow_len = Math.sqrt(L * L + H * H);
@@ -139,6 +136,11 @@ public class DependencyLine extends JPanel
         double y_3 = ey - arrXY_1[1];
         double x_4 = ex - arrXY_2[0];
         double y_4 = ey - arrXY_2[1];
+        if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+                && toSide == cph.selectedJpanelSide))
+            g2.setColor(Color.RED);
+        else
+            g2.setColor(Color.BLACK);
         g2.drawLine((int) ex, (int) ey, (int) x_3, (int) y_3);
         g2.drawLine((int) ex, (int) ey, (int) x_4, (int) y_4);
         drawDashedLine(g2, (int) sx, (int) sy, (int) ex, (int) ey);
@@ -148,6 +150,11 @@ public class DependencyLine extends JPanel
     public void drawDashedLine(Graphics2D g2, int x1, int y1, int x2, int y2) {
         Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL,
                 0, new float[] { 9 }, 0);
+        if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+                && toSide == cph.selectedJpanelSide))
+            g2.setColor(Color.RED);
+        else
+            g2.setColor(Color.BLACK);
         g2.setStroke(dashed);
         g2.drawLine(x1, y1, x2, y2);
         g2.dispose();

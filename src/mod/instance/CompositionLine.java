@@ -39,6 +39,11 @@ public class CompositionLine extends JPanel
 
 	@Override
 	public void paintComponent(Graphics g) {
+		if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+				&& toSide == cph.selectedJpanelSide))
+			g.setColor(Color.RED);
+		else
+			g.setColor(Color.BLACK);
 		Point fpPrime;
 		Point tpPrime;
 		renewConnect();
@@ -71,7 +76,11 @@ public class CompositionLine extends JPanel
 		Polygon polygon = new Polygon(x, y, x.length);
 		g.setColor(Color.WHITE);
 		g.fillPolygon(polygon);
-		g.setColor(Color.BLACK);
+		if ((from == cph.selectedJpanel && toSide == cph.selectedJpanelSide) || (to == cph.selectedJpanel
+				&& toSide == cph.selectedJpanelSide))
+			g.setColor(Color.RED);
+		else
+			g.setColor(Color.BLACK);
 		g.drawPolygon(polygon);
 	}
 
