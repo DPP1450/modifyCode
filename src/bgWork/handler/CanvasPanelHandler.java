@@ -103,10 +103,8 @@ public class CanvasPanelHandler extends PanelHandler {
 				case 0:
 				case 1:
 					int result = findClickedPort(members.elementAt(i).getLocation(), members.elementAt(i).getSize(), p);
-					if (result != -1) {
+					if (result != -1)
 						selectedJpanel = members.elementAt(i);
-						System.out.println("clicked Port !!");
-					}
 					selectedJpanelSide = result;
 				default:
 					break;
@@ -121,13 +119,13 @@ public class CanvasPanelHandler extends PanelHandler {
 		final int LEFT = 1;
 		final int BOTTOM = 0;
 		Rectangle topRec = new Rectangle();
-		topRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY(), 15, 15);
+		topRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY(), 10, 5);
 		Rectangle rightRec = new Rectangle(Locat);
-		rightRec.setBounds((int) Locat.getX() + Size.width - 5, (int) Locat.getY() + Size.height - 5, 15, 15);
+		rightRec.setBounds((int) Locat.getX() + Size.width - 5, (int) Locat.getY() + Size.height / 2 - 5, 5, 10);
 		Rectangle leftRec = new Rectangle(Locat);
-		leftRec.setBounds((int) Locat.getX(), (int) Locat.getY() + Size.height - 5, 15, 15);
+		leftRec.setBounds((int) Locat.getX(), (int) Locat.getY() + Size.height / 2 - 5, 5, 10);
 		Rectangle BottomRec = new Rectangle(Locat);
-		BottomRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY() + Size.height - 5, 15, 15);
+		BottomRec.setBounds((int) Locat.getX() + Size.width / 2 - 5, (int) Locat.getY() + Size.height - 5, 10, 5);
 		if (topRec.contains(p))
 			return TOP;
 		if (rightRec.contains(p))
@@ -137,18 +135,6 @@ public class CanvasPanelHandler extends PanelHandler {
 		if (BottomRec.contains(p))
 			return BOTTOM;
 		return OUT_SIDE;
-
-		// gra.fillRect(this.getWidth() / 2 - selectBoxSize, 0, selectBoxSize * 2,
-		// selectBoxSize);
-		// gra.fillRect(this.getWidth() / 2 - selectBoxSize,
-		// this.getHeight() - selectBoxSize, selectBoxSize * 2,
-		// selectBoxSize);
-		// gra.fillRect(0, this.getHeight() / 2 - selectBoxSize, selectBoxSize,
-		// selectBoxSize * 2);
-		// gra.fillRect(this.getWidth() - selectBoxSize,
-		// this.getHeight() / 2 - selectBoxSize, selectBoxSize,
-		// selectBoxSize * 2);
-		// public void fillRect(int x, int y, int width, int height)
 	}
 
 	void selectByClick(MouseEvent e) {
