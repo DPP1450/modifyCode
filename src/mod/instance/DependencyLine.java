@@ -1,10 +1,6 @@
 package mod.instance;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Polygon;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -23,6 +19,8 @@ public class DependencyLine extends JPanel
     JPanel to;
     int toSide;
     Point tp = new Point(0, 0);
+    int arrowSize = 6;
+    int panelExtendSize = 10;
     boolean isSelect = false;
     int selectBoxSize = 5;
     CanvasPanelHandler cph;
@@ -43,8 +41,8 @@ public class DependencyLine extends JPanel
                 fp.y - this.getLocation().y);
         tpPrime = new Point(tp.x - this.getLocation().x,
                 tp.y - this.getLocation().y);
-        g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
-        paintArrow(g, tpPrime);
+        g.setColor(Color.BLACK);
+        drawDashedALine(g, fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
         if (isSelect == true) {
             paintSelect(g);
         }
@@ -52,15 +50,17 @@ public class DependencyLine extends JPanel
 
     @Override
     public void reSize() {
-        Dimension size = new Dimension(Math.abs(fp.x - tp.x) + 10,
-                Math.abs(fp.y - tp.y) + 10);
+        Dimension size = new Dimension(
+                Math.abs(fp.x - tp.x) + panelExtendSize * 2,
+                Math.abs(fp.y - tp.y) + panelExtendSize * 2);
         this.setSize(size);
-        this.setLocation(Math.min(fp.x, tp.x) - 5, Math.min(fp.y, tp.y) - 5);
+        this.setLocation(Math.min(fp.x, tp.x) - panelExtendSize,
+                Math.min(fp.y, tp.y) - panelExtendSize);
     }
 
     @Override
     public void paintArrow(Graphics g, Point point) {
-        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -75,6 +75,7 @@ public class DependencyLine extends JPanel
         renewConnect();
         System.out.println("from side " + fromSide);
         System.out.println("to side " + toSide);
+        ;
     }
 
     void renewConnect() {
@@ -123,5 +124,46 @@ public class DependencyLine extends JPanel
 
     public void setSelect(boolean isSelect) {
         this.isSelect = isSelect;
+    }
+
+    public void drawDashedALine(Graphics g, double sx, double sy, double ex, double ey) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.BLACK);
+        double H = 10, L = 10;
+        double awrad = Math.atan(L / H);
+        double arraow_len = Math.sqrt(L * L + H * H);
+        double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);
+        double[] arrXY_2 = rotateVec(ex - sx, ey - sy, -awrad, true, arraow_len);
+        double x_3 = ex - arrXY_1[0];
+        double y_3 = ey - arrXY_1[1];
+        double x_4 = ex - arrXY_2[0];
+        double y_4 = ey - arrXY_2[1];
+        g2.drawLine((int) ex, (int) ey, (int) x_3, (int) y_3);
+        g2.drawLine((int) ex, (int) ey, (int) x_4, (int) y_4);
+        drawDashedLine(g2, (int) sx, (int) sy, (int) ex, (int) ey);
+
+    }
+
+    public void drawDashedLine(Graphics2D g2, int x1, int y1, int x2, int y2) {
+        Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL,
+                0, new float[] { 9 }, 0);
+        g2.setStroke(dashed);
+        g2.drawLine(x1, y1, x2, y2);
+        g2.dispose();
+    }
+
+    public static double[] rotateVec(double e, double f, double ang,
+            boolean isChLen, double newLen) {
+        double mathstr[] = new double[2];
+        double vx = e * Math.cos(ang) - f * Math.sin(ang);
+        double vy = e * Math.sin(ang) + f * Math.cos(ang);
+        if (isChLen) {
+            double d = Math.sqrt(vx * vx + vy * vy);
+            vx = vx / d * newLen;
+            vy = vy / d * newLen;
+            mathstr[0] = vx;
+            mathstr[1] = vy;
+        }
+        return mathstr;
     }
 }
